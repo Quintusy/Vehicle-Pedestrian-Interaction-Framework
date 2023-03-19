@@ -229,7 +229,7 @@ class PP_Module(object):
     def train(self, num,
               train_data, val_data,
               batch_size=256,
-              epochs=10,
+              epochs=200,
               lr=0.001,
               learning_scheduler=True,
               **model_opts):
@@ -287,15 +287,15 @@ class PP_Module(object):
             pp_model = self.pp_model()
             # pp_model.load_weights(model_path)
 
-        train_data = ([train_data['enc_input'][:100, 0],
-                       train_data['enc_input'][:100, 1],
-                       train_data['dec_input'][:100]],
-                      train_data['pred_target'][:100])
+        train_data = ([train_data['enc_input'][:, 0],
+                       train_data['enc_input'][:, 1],
+                       train_data['dec_input']],
+                      train_data['pred_target'])
 
-        val_data = ([val_data['enc_input'][:100, 0],
-                     val_data['enc_input'][:100, 1],
-                     val_data['dec_input'][:100]],
-                    val_data['pred_target'][:100])
+        val_data = ([val_data['enc_input'][:, 0],
+                     val_data['enc_input'][:, 1],
+                     val_data['dec_input']],
+                    val_data['pred_target'])
 
         pp_model.compile(loss=loss, optimizer=optimizer)
 
@@ -311,7 +311,7 @@ class PP_Module(object):
 
         if learning_scheduler:
             early_stop = EarlyStopping(monitor='val_loss',
-                                       min_delta=1.0, patience=10,
+                                       min_delta=0.2, patience=10,
                                        verbose=1)
             plateau_sch = ReduceLROnPlateau(monitor='val_loss',
                                             factor=0.2, patience=5,
@@ -394,7 +394,7 @@ class PP_Module(object):
                                                                  encoder_feature_size=11,
                                                                  decoder_feature_size=1,
                                                                  predict_length=15,
-                                                                 prediction_size=6, )
+                                                                 prediction_size=6)
         model = bi_model.model()
 
         return model

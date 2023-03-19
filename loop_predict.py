@@ -237,7 +237,7 @@ class LoopPredict(object):
                      'height_rng': [0, float('inf')],
                      'squarify_ratio': 0,
                      'data_split_type': 'default',
-                     'seq_type': 'trajectory',
+                     'seq_type': 'crossing',
                      'min_track_size': 60,
                      'random_params': {'ratios': None,
                                        'val_data': True,
@@ -396,7 +396,3 @@ class LoopPredict(object):
                 pickle.dump(results, fid, pickle.HIGHEST_PROTOCOL)
 
         return perf
-
-if __name__ == '__main__':
-    loop = LoopPredict()
-    loop.loop_predict()

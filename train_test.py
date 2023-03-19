@@ -19,16 +19,12 @@ def train_predict(dataset, data_path, train_test):
     loop_test = LoopPredict()
 
     pie_path = data_path
-    if dataset == 'pie_dataset':
-        data_path = pie_path
-    else:
-        data_path = 'data/pie_dataset'
 
     if not train_test:
-        loop_train.loop_train(data_path=data_path)
+        loop_train.loop_train(data_path=pie_path)
 
     if train_test:
-        perf_final = loop_test.loop_predict(data_path=data_path)
+        perf_final = loop_test.loop_predict(data_path=pie_path)
 
         t = PrettyTable(['MSE', 'C_MSE'])
         t.title = 'Trajectory prediction model'
@@ -37,7 +33,6 @@ def train_predict(dataset, data_path, train_test):
         print(t)
 
 
-# train_test = 0 (train only), 1 (train-test), 2 (test only)
 def pre_trained_SEModule(train_test):
 
     file_dir = os.path.dirname(__file__)

@@ -346,8 +346,3 @@ class LoopTrain(object):
                 list(zip(np.concatenate((vp_testY, pp_testY, un), axis=2),
                          pp_train_data['enc_input'][:, 0:15, :])))
             all_data['pred_data'][1]['pred_target'] = self.short_y_windows(num, pp_train_data['pred_target'])
-
-
-if __name__ == '__main__':
-    loop = LoopTrain()
-    loop.loop_train(data_path='data/pie_dataset')

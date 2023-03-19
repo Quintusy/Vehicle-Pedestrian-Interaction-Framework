@@ -227,7 +227,7 @@ class VP_Module(object):
 
     def train(self, num, data_train, data_val,
               batch_size=256,
-              epochs=10,
+              epochs=200,
               lr=0.001,
               learning_scheduler=True,
               **model_opts):
@@ -286,15 +286,15 @@ class VP_Module(object):
         print('en_input:', np.array(data_train['enc_input'][:, 0]).shape)
         print('dec_input:', np.array(data_train['dec_input']).shape)
         print('pred_target:', np.array(data_train['pred_target']).shape)
-        train_data = ([data_train['enc_input'][:100, 0],
-                       data_train['enc_input'][:100, 1],
-                       data_train['dec_input'][:100]],
-                      data_train['pred_target'][:100])
+        train_data = ([data_train['enc_input'][:, 0],
+                       data_train['enc_input'][:, 1],
+                       data_train['dec_input']],
+                      data_train['pred_target'])
 
-        val_data = ([data_val['enc_input'][:100, 0],
-                     data_val['enc_input'][:100, 1],
-                     data_val['dec_input'][:100]],
-                    data_val['pred_target'][:100])
+        val_data = ([data_val['enc_input'][:, 0],
+                     data_val['enc_input'][:, 1],
+                     data_val['dec_input']],
+                    data_val['pred_target'])
 
         vp_model.compile(loss=loss, optimizer=optimizer)
 
@@ -310,7 +310,7 @@ class VP_Module(object):
 
         if learning_scheduler:
             early_stop = EarlyStopping(monitor='val_loss',
-                                       min_delta=1.0, patience=10,
+                                       min_delta=0.2, patience=10,
                                        verbose=1)
             plateau_sch = ReduceLROnPlateau(monitor='val_loss',
                                             factor=0.2, patience=5,
@@ -393,7 +393,7 @@ class VP_Module(object):
                                                                  encoder_feature_size=11,
                                                                  decoder_feature_size=1,
                                                                  predict_length=15,
-                                                                 prediction_size=4, )
+                                                                 prediction_size=4)
         model = bi_model.model()
 
         return model

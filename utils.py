@@ -121,17 +121,3 @@ def jitter_bbox(img_path, bbox, mode, ratio):
         jit_boxes.append(b)
 
     return jit_boxes
-
-if __name__ == '__main__':
-    a = [
-        [[1,2,3],
-          [4,2,8],
-          [5,8,6]],
-         [[5, 2, 3],
-          [4, 2, 8],
-          [5, 8, 7]]
-         ]
-    a = np.array(a)
-    print(np.mean(a, axis=-1)[np.newaxis,:] )
-    print(np.expand_dims(np.mean(a, axis=-1), axis=1))
-    print(np.reshape(np.mean(a, axis=-1), (a.shape[0], a.shape[1], 1)))
