@@ -1,6 +1,6 @@
 ## Introduction
 
-This repository contains Python code and pretrained models for Vehicle-pedestrian-interaction-based iterative prediction framework for pedestrian's trajectory presented in our paper.
+This repository contains python code and pretrained models for vehicle-pedestrian-interaction-based iterative prediction framework for pedestrian's trajectory presented in our paper.
 
 ## Requirements
 
@@ -20,7 +20,7 @@ pillow
 python train_test.py --data /path/to/data
 ```
 
-`--data [dir]`, data directory
+`--data [dir]`: data directory
 
 ## Test
 
@@ -28,9 +28,9 @@ python train_test.py --data /path/to/data
 python train_test.py --data /path/to/data --test
 ```
 
-`--data [dir]`, data directory
+`--data [dir]`: data directory
 
-`--test`, test flag
+`--test`: test flag
 
 
 
