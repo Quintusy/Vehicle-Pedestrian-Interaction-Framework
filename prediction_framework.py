@@ -48,7 +48,7 @@ def pre_trained_SEModule(train_test):
                          embed_dropout=0.35)
     data = se_model.get_train_data(path_train)
 
-    if not train_test:  # Train
+    if train_test:  # Train
         se_model.train(data['train'],
                        data['val'],
                        batch_size=64,
@@ -60,7 +60,7 @@ def pre_trained_SEModule(train_test):
                        learning_scheduler=True,
                        model_name='se_model')
 
-    if train_test:  # Test
+    if not train_test:  # Test
         saved_files_path = join(file_dir, r'./models/SE_Module/se_model_pretrained')
         test_results = se_model.test_chunk(data['test'], model_path=saved_files_path)
 
@@ -94,19 +94,19 @@ if __name__ == '__main__':
         description='train and test',
     )
     parser.add_argument('--data', required=True, type=str)
-    parser.add_argument('--test', required=False, action='store_true')
+    parser.add_argument('--training', required=False, action='store_true')
 
     args = parser.parse_args()
 
     warnings.filterwarnings("ignore")
     #print(os.environ.copy()['DATA_PATH'])
     data_path = args.data
-    train_test = args.test
+    train_test = args.training
 
     unzip_data(data_path)
-    main(train_test=args.test, data_path=data_path)
+    main(train_test=train_test, data_path=data_path)
     #try:
     #    main(train_test=args.test, data_path=data_path)
     #except ValueError:
-    #    raise ValueError('Usage: python train_test.py <train_test>\n'
+    #    raise ValueError('Usage: python prediction_framework.py <train_test>\n'
     #                     'train_test: 0 - train only, 1 - train and test, 2 - test only\n')

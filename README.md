@@ -1,36 +1,21 @@
 ## Introduction
 
-This repository contains python code and pretrained models for vehicle-pedestrian-interaction-based iterative prediction framework for pedestrian's trajectory presented in our paper.
+Vehicle-pedestrian-interaction-based iterative prediction framework for pedestrian's trajectory.
 
 ## Requirements
 
-tensorflow (tested with 1.9 and 1.14)
-
-keras (tested with 2.1 and 2.2)
-
-scikit-learn
-
-numpy
-
-pillow
-
+Required environment and libs include tensorflow (version 1.14), keras (version 2.2), scikit-learn, numpy, and pillow.
 ## Training
 
 ```sh
-python train_test.py --data /path/to/data
+python prediction_framework.py --data /path/to/data --training
 ```
 
-`--data [dir]`: data directory
-
-## Test
+## Usage
 
 ```sh
-python train_test.py --data /path/to/data --test
+python prediction_framework.py --data /path/to/data
 ```
-
-`--data [dir]`: data directory
-
-`--test`: test flag
 
 
 
